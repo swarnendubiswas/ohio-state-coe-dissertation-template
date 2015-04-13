@@ -7,7 +7,7 @@ I have used this template for my candidacy proposal, and it seems current as of 
 since it might help other students. No LaTeX template seems to be available from the graduate school web pages as of
 April 2015.
 
-## Directory structure
+### Directory structure
 
 The following structure is suggested.
 
@@ -16,26 +16,27 @@ The following structure is suggested.
 * src -- LaTeX files.
 * tmp -- You can redirect your output (`*.aux, *.lot`) to this directory. 
 
-## Building the project
+### Building the project
 
-I have tested this with TexLive distribution 2011 onwards with 
+I have tested with TexLive distribution 2011 onward with 
 * latexmk 
 * pdflatex
 
-You might need to change the location of the bibliography file based on your environment and build system.
+You might need to change or pass the location of the bibliography file based on your environment and build system.
 
-## Notes
+### Notes
 
 #### Adding figures
 
-You can use the following template which shows how your `figs` directory structure is setup.
+You can use the following template which shows how your `figs` directory structure is already setup.
 
+```
 \begin{figure}
   \centering
   \includegraphics{chap1/xx}
   \caption{YY}
   \label{fig:zz}
 \end{figure}
-
+```
 
 
