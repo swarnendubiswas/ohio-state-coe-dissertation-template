@@ -1,0 +1,59 @@
+
+WHAT YOU NEED IN ORDER TO USE "OSUDISSERT96"
+(the 1996 Graduate School Dissertation/Thesis format)
+
+
+To use the osudissert style, you will need to have
+
+   1. LaTeX2e (obviously).
+
+   2. osudissert96.cls
+
+
+COMPILING THE EXAMPLE
+
+
+The example is split into several files.  You should make sure you
+have the following files:
+
+
+         Thesis.tex        The main document. Run LaTeX on this file
+
+         abstract.tex      The Abstract for the thesis.
+
+         ack.tex           The Acknowledgement for the thesis.
+
+         vita.tex          The Vita for the author of the thesis.
+
+         ch1.intro.tex     Chapter 1 of the thesis.
+
+         ch2.problem.tex   Chapter 2 of the thesis.
+
+         ch3.implem.tex    Chapter 3 of the thesis.
+
+         ch4.end.tex       Chapter 4 of the thesis.
+
+         app1.tex          The first appendix of the thesis.
+
+         app2.tex          The second appendix of the thesis.
+
+         bibfile.bib       The sample bibliography database.
+
+
+To fully compile this example, you should do the following:
+
+
+   1. Run LaTeX on Thesis. This will do the inital compilation of the
+document and will create a list of the labels and references made.
+
+   2. Run BibTeX on Thesis. This will go into bibfile.bib and extract
+the appropriate bibliography for the references cited in the
+dissertation.
+
+   3. Run LaTeX on Thesis two more times. The first time, LaTeX will
+go through and (at the end) will recognize the references made in the
+citations and will set up the table of contents.  However, the table
+of contents will probably be off since the table of contents will
+grow. The second time through, LaTeX will get the page numbers correct
+in the table of contents.
+

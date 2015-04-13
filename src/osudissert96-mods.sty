@@ -1,0 +1,1192 @@
+%
+% $Id: osudissert96-mods.sty,v 1.5 1998/11/02 00:45:41 hanes Exp $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MDH:
+% This file has been modified significantly to accommodate the new
+% dissertation/thesis format put out by the Graduate School in 1996.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This document was written by Manas Mandal based on ``report.cls''
+% and ``newdissert.sty''.
+% Elizabeth Zwicky wrote the original ``dissert.sty'' based on
+% Lamport's ``report.sty'' and the Stanford thesis style ``suthesis.sty''.
+% J. Ramanujam and Con O'Connell got ``newdissert.sty'' working.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Algorithms/experiences/implementation ideas are thanks to Elizabeth
+% Zwicky, J. Ramanujam, Con O'Connell, Bill White, Ben Blake, Ronnie
+% Sarkar, Julie Barnes, John Mudd, Andy Yang, Doug Roble, Tony Leclerc,
+% Al Fencl, Manas Mandal, Jim Vaigl and a host of others who have gone
+% through the ordeal of getting the format through the Grad School at OSU.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2011/02/11. Theodore P. Pavlic - Added \blankpage for omitted
+%                                  \disscopyright
+% 2010/07/22. Theodore P. Pavlic - Changed ``Adviser'' to ``Advisor''
+%                                - Title back in user's case choice
+%                                  (title case preferred)
+%                                - Signature line removed and committee
+%                                  centered
+%                                - ``Graduate Program in (unit)'' line placed
+%                                  between name and university lines
+%                                - Title casing
+%                                - Attempt to match title page spacing
+%                                  better
+%                                - Chapter number and title on same line
+%                                - Remove ``Chapters:'' from TOC
+%                                - Use ``Part'' as opposed to ``Volume''
+% 2007/06/15. Theodore P. Pavlic - Capitalized title and number printed
+%                                  on abstract page (for grad school)
+%                                  and changed page numbering style on
+%                                  title page to alph (for hyperref
+%                                  conflicts)
+% 1996/11/01. MDH - Fixed co-advisor bugs (Adviser->Coadviser)
+% 1996/10/11. MDH - Renamed to support older usage of osudissert
+% 1996/10/09. MDH - Got rid of the nasty MakeUppercase command 
+%                 - Unfortunately, this means uppercasing must be done manually
+% 1996/08/01. MDH - major overhaul to conform to new guidelines.
+% 1994/08/17. Manas Mandal finished newdissert-mod, Version 1.
+% 1994/08/10. Manas Mandal created newdissert-mod.
+% 11/25/92. Al Fencl and Manas Mandal added the MS abstract support
+% 11/17/92. Al Fencl added the VITA support
+% 5/18/90. J. Ramanujam froze his version of newdissert.
+% 1988/89. Elizabeth Zwicky created dissert.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%  ****************************************
+%  *            PAGE LAYOUT               *
+%  ****************************************
+
+\typeout{Version \rcsStrip$Revision: 1.5 $  of \rcsStripFile $RCSfile: osudissert96-mods.sty,v $ (\rcsStripDate$Date: 1998/11/02 00:45:41 $)}
+
+%% MM. 1994/08/09. Defining singlespace, doublespace, triplespace.
+%% Using values that Ram had chosen on 1989/11/13 so that the spacing
+%% looks closest to what is in the Ugly Brown Book.
+
+\newlength\singlespacelength
+\newlength\doublespacelength
+\newlength\triplespacelength
+
+\setlength\singlespacelength{15\p@}
+\setlength\doublespacelength{26\p@}
+\setlength\triplespacelength{40\p@}
+
+\newcommand\startsinglespace{\setlength\baselineskip{\singlespacelength}}
+\newcommand\startdoublespace{\setlength\baselineskip{\doublespacelength}}
+
+%% MDH - Adjust margins for page number at bottom of page
+\setlength\textwidth{6.0in}
+\setlength\topmargin{0pt}
+\setlength\headheight{0pt}
+\setlength\headsep{0pt}
+\setlength\textheight{8.625in}
+
+\setlength\footskip{0.375in}
+
+%% MM. 1994/08/09. Preserving Ram's choices.
+%% MM. 1994/08/16. Corrected the twoside values. Ram's were wrong.
+\if@twoside
+     \setlength\oddsidemargin   {0.5in}
+     \setlength\evensidemargin  {0.0in}
+     \setlength\marginparwidth  {85\p@}
+\else
+     \setlength\oddsidemargin   {0.5in}
+     \setlength\evensidemargin  {0.5in}
+     \setlength\marginparwidth  {68\p@}
+\fi
+
+\if@twocolumn
+     \setlength\oddsidemargin  {0.5in}
+     \setlength\evensidemargin {0.5in}
+     \setlength\marginparwidth {48\p@}
+\fi
+
+\setlength\footnotesep{\singlespacelength}
+
+\skip\footins 8pt plus 2pt minus 4pt % Space between last line of text and 
+                                     % top of first footnote.
+
+%% MM. 1994/08/12. ``newdissert.sty'' had solved this by redefining
+%% \begin{document}. I am doing the stuff using AtBeginDocument in 2e,
+%% and also doing it *safely* in 209 compatible mode.
+
+\if@compatibility
+  \let\my@document\document
+  \def\document{
+    \my@document
+    \startdoublespace
+    \pagestyle{headings}%
+  }
+\else
+  \AtBeginDocument{
+    \startdoublespace
+    \pagestyle{headings}%
+  }
+\fi
+
+
+%    ****************************************
+%    *        CHAPTERS AND SECTIONS         *
+%    ****************************************
+
+% MDH - Some general purpose typesetting commands.  Included to give the
+% document a consistent and easy-to-change interface.
+\def\boldcmd{\bfseries}
+\def\typesetHeading#1{{\normalfont\large\boldcmd{#1}}}
+\def\typesetColumnHeading#1{{\boldcmd #1}}
+\def\typesetChapterTitle#1{{#1}}
+
+\newcommand\dedicationname{Dedication}
+
+
+\newcommand\vitaname{Vita}
+\newcommand\vitanameLC{Vita}
+
+\newcommand\publicationsname{Publications}
+
+\newcommand\fieldsname{Fields of Study}
+
+\renewcommand\abstractname{Abstract}
+\newcommand\abstractnameLC{Abstract}
+
+\renewcommand\listfigurename{List of Figures}
+\newcommand\listfigurenameLC{List of Figures}
+
+\renewcommand\listtablename{List of Tables}
+\newcommand\listtablenameLC{List of Tables}
+
+\newcommand\listsymbolname{List of Symbols}
+\newcommand\listsymbolnameLC{List of Symbols}
+
+% ted - (2010) Use ``Part'' as opposed to ``Volume'' (for no OSU-related reason)
+\renewcommand\partname{Part}
+
+\renewcommand\contentsname{Table of Contents}
+\newcommand\contentsnameLC{Table of Contents}
+
+\renewcommand\chaptername{Chapter}
+\newcommand\chapternameLC{Chapter}
+
+% ted - (2010) removed ``Chapters:'' from TOC below
+%\newcommand\chaptersname{Chapters}
+
+\renewcommand\appendixname{Appendix}
+\newcommand\appendixnameLC{Appendix}
+
+\renewcommand\bibname{Bibliography}
+\newcommand\bibnameLC{Bibliography}
+
+\newcommand\appendicesname{Appendices}
+
+\newcommand\pagename{Page}
+
+\newcommand\acknowledgmentname{Acknowledgments}
+\newcommand\acknowledgmentnameLC{Acknowledgments}
+
+%% MM. 1994/08/09. Preserving Ram's algorithm.
+\newif\ifapp
+\appfalse
+
+% ted - (2010) ``Part'' is supportedin report; put it here too
+%       modify it the same way chapter is below (re: arabic page
+%       numbers; title on same line)
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >-2\relax
+      \refstepcounter{part}%
+      \renewcommand\thepage{\arabic{page}}
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
+    \else
+      \renewcommand\thepage{\arabic{page}}
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    \ifnum\value{part}=1
+      \pagenumbering{arabic}
+    \fi
+    \markboth{}{}%
+    {\centering
+     \interlinepenalty \@M
+     \normalfont
+     \ifnum \c@secnumdepth >-2\relax
+       \huge\bfseries \partname\nobreakspace\thepart:\ %
+       %\par
+       %\vskip 20\p@
+     \fi
+     \Huge \bfseries #2\par}%
+    \@endpart}
+
+%
+% MDH - the need for osuchapter and currentlabel is now gone.  GS has
+% redefined chapters to be done in arabic numerals and not roman.
+%
+
+\def\@chapter[#1]#2{
+%% MM. 1994/08/09. Cheating!! Doing it even if secnumdepth didn't want it.
+%% Grad School does want chapters, so checking secnumdepth is immaterial.
+  \refstepcounter{chapter}%
+
+%% MM. 1994/08/06. Set to arabic for *every* chapter to handle cases
+%% when Chapter I is not included in includeonly.
+  \renewcommand\thepage{\arabic{page}}
+
+%% MM. 1994/08/09. Preserving Ram's choices.
+  \ifapp
+    \ifnum\value{chapter}=1
+% ted - (2010) change how ``Appendices'' shows up in TOC
+      \addcontentsline{toc}{part}{\appendicesname}%
+      %\addtocontents{toc}{\vskip 1.0em plus 1pt 
+      %   \hskip -\parindent \appendicesname\hfill%
+	  %\vskip 0.25em\rm}
+    \else
+      {}
+    \fi
+  \else
+% ted - (2010) remove ``Chapters:'' from TOC
+% ted - (2010) (also removed def of \chaptersname above)
+    \ifnum\value{chapter}=1
+      \ifnum\value{part}=0
+        \pagenumbering{arabic}
+      \fi
+%      \pagenumbering{arabic}
+%      \addtocontents{toc}{\vskip 1.0em plus 1pt
+%         \hskip -\parindent \chaptersname:%
+%    \vskip 0.25em\rm}
+    \fi
+  \fi
+  \pagestyle{headings}
+
+  \ifnum \c@secnumdepth >\m@ne
+    \typeout{\@chapapp\space\thechapter.}
+    \addcontentsline{toc}{chapter}{\protect\numberline{\thechapter.}#1}%
+  \else
+    \addcontentsline{toc}{chapter}{#1}
+  \fi
+
+  \chaptermark{#1}%
+
+  \if@twocolumn
+     \@topnewpage[\@makechapterhead{#2}]%
+  \else
+     \@makechapterhead{#2}%
+% MDH - 1996/08/01 - GS indents the first paragraph of a chapter.
+%     \@afterheading
+  \fi
+}
+
+%
+% MDH - Chapter head commands has been modified to conform to the new GS
+% guidelines.  Chapter # is 2in from top, followed by 4 spaces, followed by
+% the title, about 4 spaces, and then the text.
+%
+
+% ted - (2010) New guidelines suggest chapter number and title on same line
+\def\@makechapterhead#1{%
+  \vspace*{39\p@}%
+  {\parindent \z@ \raggedright \reset@font%
+   \ifnum \c@secnumdepth >\m@ne%
+       \center\typesetHeading{\@chapapp{} \thechapter: \typesetChapterTitle{#1}}%
+       \par%
+       \vskip 0.55in%
+    \fi%
+    %\begin{center}\large\boldcmd\typesetChapterTitle{#1}\par\end{center}%
+    \nobreak%
+   \vskip 24\p@%
+  }%
+}
+
+\def\@schapter#1{%
+  \if@twocolumn
+     \@topnewpage[\@makeschapterhead{#1}]%
+  \else
+     \@makeschapterhead{#1}%
+% MDH - 1996/08/01 - GS indents the first paragraph of a chapter.
+%     \@afterheading
+  \fi%
+}
+
+\def\@makeschapterhead#1{%
+  \vspace*{43\p@}%
+  {\parindent \z@ \raggedright
+    \reset@font
+    \begin{center}\large\boldcmd\typesetChapterTitle{#1}\par\end{center}%
+%    \begin{center}\Large\sc \bf  #1\par \end{center}
+    \nobreak
+    \vskip 31\p@
+  }%
+}
+
+% MDH - these are basically identical to those in report, except the parm on
+% the 2nd line was negated to cause the first paragraph to be indented.
+% (See The Latex Companion, pg 25).
+%
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {3.5ex \@plus 1ex \@minus .2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\reset@font\large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {3.25ex\@plus 1ex \@minus .2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\large\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {3.25ex\@plus 1ex \@minus .2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
+
+\renewcommand\appendix{\par
+  \setcounter{chapter}{0}%
+  \setcounter{section}{0}%
+  \renewcommand\@chapapp{\appendixname}%
+  \renewcommand\thechapter{\Alph{chapter}}
+%% MM. 1994/08/09. Setting flag for use in \@chapter.
+  \apptrue
+}
+
+
+%    ****************************************
+%    *         FIGURES AND TABLES           *
+%    ****************************************
+
+% MDH - this is currently identical to \thefigure as defined in report.cls
+\renewcommand\thefigure{\thechapter.\@arabic\c@figure}
+
+\renewenvironment{figure}{\@float{figure}}{\end@float}
+\renewenvironment{figure*}{\@dblfloat{figure}}{\end@dblfloat}
+
+% MDH - this is currently identical to \thetable as defined in report.cls
+\renewcommand\thetable{\thechapter.\@arabic\c@table}
+
+\renewenvironment{table}{\@float{table}}{\end@float}
+\renewenvironment{table*}{\@dblfloat{table}}{\end@dblfloat}
+
+% MDH - GS wants doublespacing above captions for tables and figures.  In
+% the past, I believe, table captions appeared above the tables, though.
+
+\setlength\abovecaptionskip{27\p@}
+\setlength\belowcaptionskip{0\p@}
+
+% MDH - this is currently nearly identical to \@makecaption in report.cls
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{#1: #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    #1: #2\par
+  \else
+    \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip
+}
+
+%% MM. 1994/08/23. After lots of thought/consultation/experimentation,
+%% I chose 40pt (Ram's value) for the gap between 2 floats.
+%% For text + floats, I chose 26pt as the gap. Wish latex gave me a
+%% separate above and below textfloatsep.
+%% MM. 1995/02/26. I don't want any floatsep to be less than 24 pt.
+\setlength\floatsep    {40\p@ \@plus 2\p@ \@minus 4\p@}
+% \setlength\textfloatsep{25\p@ \@plus 2\p@ \@minus 1\p@}
+%%% jef - increase the separation a little
+\setlength\textfloatsep{40\p@ \@plus 2\p@ \@minus 1\p@}
+\setlength\intextsep   {30\p@ \@plus 4\p@ \@minus 1\p@}
+\setlength\dblfloatsep    {20\p@ \@plus 2\p@ \@minus 4\p@}
+\setlength\dbltextfloatsep{20\p@ \@plus 2\p@ \@minus 4\p@}
+
+
+%    ****************************************
+%    *            TOC, LOF, LOT             *
+%    ****************************************
+
+\addtocontents{lof}{%
+    \vskip 0.55in
+    \typesetColumnHeading{\figurename}\hfill\typesetColumnHeading{\pagename}%
+    \vskip 0.25em%
+    \rm%
+}
+
+\addtocontents{lot}{%
+    \vskip 0.55in
+    \typesetColumnHeading{\tablename}\hfill\typesetColumnHeading{\pagename}
+    \vskip 0.25em%
+    \rm%
+}
+
+%% MM. 1994/08/17. Redefining Ram's environments using new standards.
+\newenvironment{los}{
+  \chapter*{\typesetHeading{\listsymbolname}
+        \@mkboth{\uppercase{\listsymbolname}}{\uppercase{\listsymbolname}}}%
+  \addcontentsline{toc}{front}{\typesetColumnHeading{\listsymbolname}}
+  \pagestyle{plain}}
+
+\addtocontents{toc}{~\hfill{\typesetColumnHeading{\pagename}}}
+
+%% MM. 1994/08/09. The main reason Ram changed these was to avoid
+%% boldfacing of chapter and part names in toc. Good choice, IMHO.
+%% As a result, the \rm can be removed from all addtocontents.
+%% Also, toc is single space, as are the indiv. captions in lof/lot.
+
+\renewcommand\tableofcontents{%
+   \if@twocolumn
+     \@restonecoltrue\onecolumn
+   \else
+     \@restonecolfalse
+   \fi
+   \chapter*{\typesetHeading\contentsname
+             \@mkboth{\uppercase{\contentsname}}{\uppercase{\contentsname}}}%
+   \pagestyle{plain}
+   \vskip 0.4in
+   \startsinglespace
+   \@starttoc{toc}%
+   \if@restonecol\twocolumn\fi
+   \startdoublespace%
+}
+
+%% MM. 1994/08/09. Preserving algo for stuff that goes in ``front'' of toc.
+\def\l@front#1#2{\vskip 1.0em plus 1pt
+\@dottedtocline{0}{0pt}{2.3em}{#1}{#2}}
+
+\renewcommand\l@part[2]{%
+  \ifnum \c@tocdepth >-2\relax
+    \addpenalty{-\@highpenalty}%
+    \addvspace{2.25em \@plus\p@}%
+    \begingroup
+      \setlength\@tempdima{3em}%
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      {\leavevmode
+%% MM. 1994/08/09. Preserving Ram's choices.
+%       \large \bfseries #1\hfil \hbox to\@pnumwidth{\hss #2}}\par
+       \large #1\hfil \hbox to\@pnumwidth{\hss #2}}\par
+       \nobreak
+         \global\@nobreaktrue
+         \everypar{\global\@nobreakfalse\everypar{}}
+    \endgroup
+  \fi}
+
+\renewcommand\l@chapter[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+%% MM. 1994/08/09. Preserving Ram's choices.
+%    \vskip 1.0em \@plus\p@
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+%% MM. 1994/08/09. Preserving Al Fencl's choices.
+%      \parfillskip -\@pnumwidth
+%% MM. 1994/08/09. Preserving Ram's choices.
+%      \leavevmode \bfseries
+      \leavevmode
+%% MM. 1994/08/09. Preserving Ram's choices.
+%      \advance\leftskip\@tempdima
+%      \hskip -\leftskip
+%      #1\nobreak\hfil \nobreak\hbox to\@pnumwidth{\hss #2}\par
+{\@dottedtocline{0}{0em}{2.3em}{#1}{#2}}\par %
+\vskip 10pt
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
+
+%% MM. 1994/08/09. Preserving Ram's choices.
+\renewcommand\l@section      {\@dottedtocline{1}{2.5em}{2.3em}}
+\renewcommand\l@subsection   {\@dottedtocline{2}{4.8em}{3.2em}}
+
+\renewcommand\listoffigures{%
+  \if@twocolumn%
+      \@restonecoltrue\onecolumn%
+    \else%
+      \@restonecolfalse%
+    \fi%
+%% MM. 1994/08/09. Preserving Ram's choices.
+%    \chapter*{\listfigurename
+    \chapter*{\typesetHeading{\listfigurename}%
+      \@mkboth{\uppercase{\listfigurename}}%
+              {\uppercase{\listfigurename}}}%
+%% MM. 1994/08/09. Preserving Ram's choices.
+  \pagestyle{plain}%
+  \addcontentsline{toc}{front}{\listfigurenameLC}
+  \startsinglespace%
+% MDH - added to make consistent with TOC spacing
+  \vskip -0.5in
+    \@starttoc{lof}%
+    \if@restonecol\twocolumn\fi%
+    \startdoublespace%
+}
+
+\renewcommand\l@figure{\mbox{}\@dottedtocline{1}{1.5em}{2.3em}}
+
+\renewcommand\listoftables{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+%% MM. 1994/08/09. Preserving Ram's choices.
+%    \chapter*{\listtablename
+    \chapter*{\typesetHeading{\listtablename}%
+      \@mkboth{\uppercase{\listtablename}}{\uppercase{\listtablename}}}%
+%% MM. 1994/08/09. Preserving Ram's choices.
+\addcontentsline{toc}{front}{{\listtablenameLC}}%
+\startsinglespace
+\pagestyle{plain}
+% MDH - added to make consistent with TOC spacing
+  \vskip -0.5in
+    \@starttoc{lot}%
+    \if@restonecol\twocolumn\fi
+\startdoublespace
+    }
+\let\l@table\l@figure
+
+
+%    ****************************************
+%    *       BIBLIOGRAPHY AND INDEX         *
+%    ****************************************
+
+
+\renewenvironment{thebibliography}[1]
+%% MM. 1994/08/09. Preserving Ram's choices.
+%     {\chapter*{\bibname
+     {\chapter*{\typesetHeading{\bibname}
+        \@mkboth{\uppercase{\bibname}}{\uppercase{\bibname}}}%
+\addcontentsline{toc}{front}{{\bibnameLC}}
+\renewcommand\thepage{\arabic{page}}
+\pagestyle{headings}
+\thispagestyle{plain}
+\startsinglespace
+      \list{\@biblabel{\arabic{enumiv}}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            %\@openbib@code     % change made by mdh on 1996/04/18
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\arabic{enumiv}}}%
+        \renewcommand\newblock{\hskip .11em \@plus.33em \@minus.07em}%
+      \sloppy\clubpenalty10000\widowpenalty10000%
+      \sfcode`\.=\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}
+
+\renewenvironment{theindex}
+               {\if@twocolumn
+                  \@restonecolfalse
+                \else
+                  \@restonecoltrue
+                \fi
+                \columnseprule \z@
+                \columnsep 35\p@
+%% MM. 1994/08/10. Nothing in twocolumn allowed by Grad School.
+%                \twocolumn[\@makeschapterhead{\indexname}]%
+%% MM. 1994/08/09. Doing similar stuff as in Bibliography.
+\chapter*{\typesetHeading{\indexname}
+                \@mkboth{\uppercase{\indexname}}%
+                        {\uppercase{\indexname}}%
+}
+\addcontentsline{toc}{front}{{\indexname}}
+\renewcommand\thepage{\arabic{page}}
+\pagestyle{headings}
+                \thispagestyle{plain}\parindent\z@
+%% MM. 1995/02/11. Decided to make Index singlespace.
+\startsinglespace
+                \parskip\z@ \@plus .3\p@\relax
+                \let\item\@idxitem}
+%% MM. 1995/02/11. Decided to make Index singlespace.
+\startdoublespace
+               {\if@restonecol\onecolumn\else\clearpage\fi}
+
+
+%    ****************************************
+%    *            PAGE STYLES               *
+%    ****************************************
+
+
+%% MM. 1995/02/23. Command \draftstamp borrowed from draftstamp.sty
+%% written by Jim Hefferon. If /start-hook is changed to bop-hook,
+%% then it will put drafttext on every page.
+
+\def\drafttext{DRAFT}
+
+\def\draftPStranslate{ 200 30 }
+\def\draftPSscalefont{ 220 }
+%\def\draftPSgraylevel{ 0.94 }
+%% MM. 1995/02/23. I prefer lighter value, so 0.97.
+\def\draftPSgraylevel{ 0.97 }
+\def\draftPSrotate{ 65 }
+\def\draftPSmoveto{ 0 0 }
+\def\draftPSfont{ /Times-Roman }
+
+\def\draftstamp{\special{! userdict 
+       begin /start-hook{
+         gsave \draftPStranslate translate
+         \draftPSrotate rotate \draftPSfont findfont 
+         \draftPSscalefont scalefont setfont
+         \draftPSmoveto moveto \draftPSgraylevel setgray 
+         (\drafttext) show grestore
+       }def end}}%
+
+%% MM. 1995/02/23. With osudraft option \draftstamp is called
+%% immediately so code gets put in beginning of .dvi file.
+\if@osudraft
+  \draftstamp
+\fi
+
+%% MM. 1995/02/23. With osudraft option, put timestamp and drafttext.
+%% Only the foot is modified for drafts, not the head, but never for
+%% empty pages. ps@plain originally from latex.ltx. ps@headings from
+%% report.cls. ps@empty not modified.
+
+\if@osudraft
+  \def\ps@plain{\let\@mkboth\@gobbletwo
+    \let\@oddhead\@empty
+    \def\@oddfoot{\reset@font\sffamily\drafttext\hfil\reset@font%
+	          \rmfamily\thepage\hfil\reset@font\sffamily\today}
+  \let\@evenhead\@empty\let\@evenfoot\@oddfoot}
+\fi
+
+%% MM. 1994/08/12. This is different from report.cls because:
+%% Oneside, the footers have only page numbers.  Headers are empty.
+%% Twoside, the fancy headings come into effect. Unfortunately,
+%% some choices of sizes somewhere is causing harmless underfull \vbox.
+
+\if@twoside
+  \if@osudraft{}
+  \else
+    \def\ps@plain{\let\@mkboth\@gobbletwo
+       \let\@oddhead\@empty\let\@evenhead\@empty
+       \def\@oddfoot{\hfil\thepage}%
+       \def\@evenfoot{\thepage\hfil}}
+  \fi
+
+   \def\ps@headings{%
+% MDH - I don't really like the long headers in two side mode.
+       \let\@evenhead\@empty
+       \let\@oddhead\@empty
+%      \def\@evenhead{\thepage\hfil\slshape\leftmark}%
+%      \def\@oddhead{{\slshape\rightmark}\hfil\thepage}%
+      \if@osudraft
+        \def\@oddfoot{\reset@font\sffamily\drafttext\hfil\reset@font%
+  	        \rmfamily\thepage\hfil\reset@font\sffamily\today}
+        \let\@evenfoot\@oddfoot
+      \else
+        \def\@oddfoot{\hfil\thepage}%
+        \def\@evenfoot{\thepage\hfil}%
+      \fi
+
+      \let\@mkboth\markboth
+      \def\chaptermark##1{%
+        \markboth {\uppercase{\ifnum \c@secnumdepth >\m@ne
+            \@chapapp\ \thechapter. \ \fi
+            ##1}}{}}%
+      \def\sectionmark##1{%
+        \markright {\uppercase{\ifnum \c@secnumdepth >\z@
+            \thesection. \ \fi
+            ##1}}}}
+\else
+    \def\ps@headings{%
+      \let\@oddhead\@empty%
+      \if@osudraft
+         \def\@oddfoot{\reset@font\sffamily\drafttext\hfil\reset@font%
+	        \rmfamily\thepage\hfil\reset@font\sffamily\today}
+      \else
+          \def\@oddfoot{\hfil\thepage\hfil}
+      \fi
+      \let\@mkboth\markboth
+      \def\chaptermark##1{%
+        \markright {\uppercase{\ifnum \c@secnumdepth >\m@ne
+            \@chapapp\ \thechapter. \ \fi
+            ##1}}}}
+\fi
+
+%    ****************************************
+%    *         TITLE AND ABSTRACT           *
+%    ****************************************
+
+
+%% MM. 1994/08/13. While adding all those dissertation options,
+%% allowing 2 more commands. \degreeabbrev and \graduationyear
+%% for end of quarter graduation in Autumn Quarter.
+
+\def\@author{}
+\def\@title{}
+\gdef\@author{}\gdef\@title{}
+\def\authordegrees#1{\def\@authordegrees{#1}}
+\def\@authordegrees{}
+
+\def\degree#1{\def\@degree{#1}}
+\def\@degree{Doctor of Philosophy}
+\def\degreeabbrev#1{\def\@degreeabbrev{#1}}
+\def\@degreeabbrev{Ph.D.}
+\def\committee#1{\def\@committee{#1}}
+\def\@committee{Dissertation}
+\def\@thesis{Dissertation}
+\def\@candidacy{Candidacy proposal}
+\def\@Candidacy{Candidacy Proposal}
+\def\unit#1{\def\@unit{#1}}
+\def\@unit{Department of Electrical Engineering}
+\def\graduationyear#1{\def\@graduationyear{#1}}
+\def\@graduationyear{\year}
+
+\newif\ifadvisor
+%% MM. 1995/02/18. Doing co-advisors right with a new if called coadvisor.
+\newif\ifcoadvisor
+%% ted - (2010) change ``Adviser'' to ``Advisor''
+\def\@adviser{Advisor}
+%% MM. 1995/02/18. Taking care of co-advisors.
+%% ted - (2010) change ``Adviser'' to ``Advisor''
+\def\@coadviser{Co-Advisor}
+\def\advisor{\advisortrue}
+\def\@advisorname{}
+\def\advisorname#1{\edef\@advisorname{\@advisorname \vskip .75em #1}}
+%% MM. 1995/02/18. Taking care of co-advisors.
+\def\@coadvisorname{}
+\def\coadvisorname#1{\coadvisortrue\edef\@coadvisorname{\@coadvisorname\vskip .75em #1, \@coadviser}}
+\def\@member{}
+\def\member#1{\edef\@member{\@member \vskip .75em #1}}
+
+%% Temporary page counter while processing abstract.
+\newcounter{disspage}
+
+
+%% MM. 1994/08/17. Redefining maketitle using new standards, but
+%% maintaining Ram's algos.
+\renewcommand\maketitle{
+  \newcommand\@maketitle{
+    \begin{titlepage}
+    \startsinglespace
+%% MM. 1994/08/17. Using the default begin/end titlepage stuff. Need
+%% to use the titlepage environment so changes don't propagate to rest.
+%% Initializing page styles just as in other environments.
+%% ted - change pagenumbering to alphanumeric to prevent problems with
+%% hyperpage
+\pagenumbering{alph}
+%\pagenumbering{roman}
+\pagestyle{empty}
+\thispagestyle{empty}
+    \let\footnotesize\small \let\footnoterule\relax \setcounter{page}{1}
+    \null
+    \vfil
+    \vskip -36pt
+    \begin{center}
+%% MM. 1994/08/22. Added osudraft option.
+      \if@osudraft
+        \vskip -72pt
+        \fbox{{\LARGE\sc \drafttext{} -- \today}}
+        \vskip 54pt
+      \fi
+%%% jef - move title down a little
+%%% ted - (2007) make title an uppercase
+%%% ted - (2010) title is not uppercase anymore
+      \vspace*{0.6in}
+      {\Large {{\@title}} \par}
+      \vskip 40pt
+%       change to thesis for dissertation
+%       {\large {\@thesis}}
+      {\large {\@candidacy}}
+%###Disabled for candidacy proposal 
+%       \vskip 30pt
+%       {\large Presented in Partial Fulfillment of the Requirements for
+%         the Degree \@degree{} in the
+%         Graduate School of The Ohio State University}
+      \vskip 20pt
+      {\large By}
+      \vskip 20pt
+      {\large \lineskip .75em
+%         \begin{tabular}[t]{c}\@author , \@authordegrees
+        \begin{tabular}[t]{c}\@author
+        \end{tabular}\par} 
+      \vskip 15pt
+      {\large \lineskip .75em
+        \begin{tabular}[t]{c}Graduate Program in \@unit
+        \end{tabular}\par}
+      \vskip 45pt
+      {\large The Ohio State University}
+      \vskip 1.5em {\large \number\@graduationyear \par}
+    \end{center}
+    \par
+%% MM. 1995/02/18. Taking care of co-advisors.
+\ifcoadvisor
+    \vskip 30pt
+\else
+    \vskip 45pt
+\fi
+% ted - (2010) Get rid of signature line and center committee
+    \centerline{\begin{minipage}[t]{3.0in}
+%       {\large \@committee{} Committee:}\centering
+      {\large \@Candidacy{} Committee:}\centering
+      \vskip 3pt
+%% MM. 1995/02/18. Taking care of co-advisors.
+\ifcoadvisor\@coadvisorname\else\@advisorname, \@adviser\fi
+      \@member
+    \end{minipage}}
+    \vfil
+    \null
+    \end{titlepage}
+%% MM. 1994/08/17. Default begin/end titlepage stuff messes page, fixing it.
+    \pagestyle{plain}
+%% ted - page numbering back to roman
+    \pagenumbering{roman}
+    \setcounter{page}{1}
+    \setcounter{footnote}{0} \let\thanks\relax}
+  \@maketitle
+  \ifadvisor\def\@adviser{Advisor}\setcounter{page}{0}\@maketitle\fi
+  \gdef\@thanks{}
+  \startdoublespace
+  \let\maketitle\relax} 
+
+% MDH -  Redefining external abstract using new standards. - pg 128-129 of
+% GS Handbook.  True for MS & PhD now!  Note that the degree is the
+% degree of the document, not the prior degrees!
+
+\newenvironment{externalabstract}{
+  \newpage 
+  \setcounter{disspage}{\value{page}}
+  \setcounter{page}{1}
+  \pagenumbering{arabic}
+  \pagestyle{headings}
+  \thispagestyle{plain}
+  \null
+  \vskip .5in
+  \vspace*{0.125in}
+  \begin{center}
+    {\normalfont\Large{\@title}\par}
+    \vskip 12pt
+    {\large By}
+    \vskip 12pt
+    {\large \@author , \@degreeabbrev{}\\
+      \vskip 12pt
+      The Ohio State University, {\number\@graduationyear} \\
+      %% MM. 1995/02/18. Taking care of co-advisors.
+      \ifcoadvisor
+          \@coadvisorname\\
+      \else
+        \@advisorname , \@adviser\\
+      \fi
+    }
+    \vskip 36pt
+  \end{center}
+  \startdoublespace}
+{ \newpage
+  \pagenumbering{roman}
+  \pagestyle{headings}
+  \setcounter{page}{\value{disspage}}
+  \startdoublespace}
+
+%
+% MDH - The formatting for the abstract internal to (now required) the dissertation/thesis
+%
+\renewenvironment{abstract}{
+  \chapter*{\typesetHeading{\abstractname}}
+  \addcontentsline{toc}{front}{{\abstractnameLC}}
+  \thispagestyle{plain}
+  \pagestyle{plain}}
+{\par\startdoublespace}
+
+
+%% MM. 1994/08/17. Redefining copyright using new standards.
+\newcommand\disscopyright{
+  % ted - makes it so that disscopyright and title get a page number
+  \cleardoublepage
+  %\if@openright\cleardoublepage\addtocounter{page}{-2}\else\clearpage\addtocounter{page}{-1}\fi
+  \thispagestyle{empty}
+  \vspace*{\fill}
+  \begin{center}
+    \copyright \ Copyright by\\
+    \@author\\
+    {\number\@graduationyear}
+  \end{center}
+  \vspace*{\fill}
+}
+
+%% ted - provides blank page when \disscopyright is omitted
+\newcommand\blankpage{
+  \thispagestyle{empty}
+  \mbox{}
+  \cleardoublepage
+}
+
+%% MM. 1994/08/17. Redefining dedications using new standards.
+\newcommand\dedication[1]{
+  \if@openright\cleardoublepage\else\clearpage\fi
+  \thispagestyle{plain}
+  \pagestyle{plain}
+  % ted - add a phantomsection if we can (for pdf bookmarks)
+  % (this command is a fancy way of saying ``if phantomsection defined,
+  % execute it'')
+  \@ifundefined{phantomsection}{}{\phantomsection}
+  \addcontentsline{toc}{front}{{\dedicationname}}
+  \vspace*{\fill}
+  \begin{center} #1 \end{center}
+%% MM. 1994/08/17. See little point for this.
+%  \vspace{50pt}
+  \vspace*{\fill}
+}
+
+\newenvironment{acknowledgments}{
+  \chapter*{\typesetHeading{\acknowledgmentname}
+        \@mkboth{\uppercase{\acknowledgmentname}}{\uppercase{\acknowledgmentname}}}%
+  \addcontentsline{toc}{front}{{\acknowledgmentnameLC}}
+  \thispagestyle{plain}
+  \pagestyle{plain}}
+{\par\startdoublespace}
+
+\let\acknowledgements\acknowledgments
+
+
+%%
+%%  vita style for use with newdissert at Ohio State
+%%  university.  Created by H. Allan Fencl  11/92
+%%
+%%%%
+%%   Sample usage:
+%%
+%%      \begin{vita}
+%%
+%%      \dateitem{Some Date}{Why its important}
+%%      \dateitem{Another Date}{Why this is important}
+%%        ...
+%%
+%%      \begin{publist}
+%%      \researchpubs
+%%        \pubitem{My first research publication}
+%%        \pubitem{My next research publication}
+%%            ...
+%%      \instructpubs
+%%        \pubitem{Some sort of instructional publication}
+%%            ...
+%%      \end{publist}
+%%
+%%      \begin{fieldsstudy}
+%%      \majorfield{My Ph.D. Major}
+%%   %
+%%   % Note:  If there were only one field of study, the following list 
+%%   %        would best be done using the following single command:
+%%   %
+%%   %          \onestudy{Only Topic}{Only Professor}
+%%   %
+%%
+%%      \begin{studieslist}
+%%      \studyitem{Topic 1}{Professor 1}
+%%      \studyitem{Topic 2}{Professor 2}
+%%      \studyitem{Topic 3}{Professor 3}
+%%      \end{studieslist}
+%%
+%%      \end{vita}
+%%
+%%%%
+
+%% MM. 1994/08/17. Redefining Al's vita environment using new standards.
+\newenvironment{vita}{
+  \chapter*{\typesetHeading\vitaname
+        \@mkboth{\uppercase{\vitaname}}{\uppercase{\vitaname}}}%
+  \addcontentsline{toc}{front}{{\vitanameLC}}
+  \thispagestyle{plain}
+  \pagestyle{plain}
+  \vskip 10pt
+  \startsinglespace}
+{\par\startdoublespace}
+
+
+%%
+%%  \dateitem{date}{what}
+%%
+%%  Creates a listing of important dates. The date and what are 
+%%  separated by a \dotfill and the what is in a parbox
+%%
+
+\def\dateitem#1#2{\noindent #1 \dotfill \parbox[t]{2.75in}{#2}\par~\par}
+
+%%
+%%  \begin{publist} ...\end{publist}
+%%
+%%  Used around the list of publications.  Items done and separated
+%%  using the commands below
+%%
+
+\newenvironment{publist}%
+  {\vspace*{15pt}\begin{center}{\typesetHeading{\publicationsname}}%
+   \end{center}\vspace*{10pt}}
+  {\vspace{\singlespacelength}}
+
+%%
+%% \researchpubs  and \instructpubs
+%%
+%% Used to create ``sub-headings'' within the list of publications
+%%
+
+\def\researchpubs{\noindent {\bf Research Publications}\par~~\par}
+\def\instructpubs{\noindent {\bf Instructional Publications}\par~~\par}
+
+%%
+%%  \pubitem{reference}
+%%
+%%  Used to list the references you have within a publist environment
+%%  Note:  Easiest to use bibtex to generate this list.
+%%
+
+\def\pubitem#1{\noindent #1 \par~~\par}
+
+%%
+%% \begin{fieldsstudy} ...\end{fieldsstudy}
+%%
+%%  Used to create the list of your major and what fields you have 
+%%  looked at within your major.
+%%
+
+\newenvironment{fieldsstudy}%
+  {\begin{center}{\typesetHeading\fieldsname}\end{center}%
+   \vspace*{15pt}}
+  {}
+
+% ted - (2010) default to \@unit if star present
+%%
+%% \majorfield{Field}
+%% \majorfield*
+%%
+%%  Used to create a line indicating your major
+%%    e.g. Computer Science and Engineering
+%%
+
+\def\majorfield{\@ifstar{\@majorfield{\@unit}}{\@majorfield}}
+\def\@majorfield#1{\noindent Major Field:  #1\par~\par}
+
+%%
+%% \onestudy{Topic}{Professor}
+%%
+%%  Used to create a single line if you have studies only one topic.
+%%  If have looked at more than one thing, should use the environment below.
+%%
+
+\def\onestudy#1#2{Studies in #1: #2}
+
+%%
+%%  The following is used to list the topics you have studies and who you
+%%  studied with.
+%%
+%% \begin{studieslist}
+%% \studyitem{Topic}{Professor}
+%% \studyitem{Topic}{Professor}
+%%    ...
+%% \studyitem{Topic}{Professor}
+%% \end{studieslist}
+%%
+
+\def\studieslist{Studies in:\par\vspace*{8pt}\hspace*{2em}\begin{tabular}{l l}}
+\def\endstudieslist{\end{tabular}}
+
+\def\studyitem#1#2{#1 & #2\\}
+
+%%%
+%%% End of vita stuff
+%%%
+
+%%
+%% MDH 1996/10/04: verse, quotation, and quote were added to comply with GS
+%% requirements of single spacing.  Added due to missed MM update.
+%% They are basically modified versions out of report.cls
+%%
+%% MM. 1995/03/08. Stephen Edwards found out that these are single-spaced.
+%%
+\renewenvironment{verse}
+               {\let\\=\@centercr
+                \list{}{\itemsep      \z@
+                        \itemindent   -1.5em%
+                        \listparindent\itemindent
+                        \rightmargin  \leftmargin
+                        \advance\leftmargin 1.5em}%
+%                \item[]}
+                \item[]\startsinglespace}
+%               {\endlist}
+               {\endlist\startdoublespace}
+\renewenvironment{quotation}
+               {\list{}{\listparindent 1.5em%
+                        \itemindent    \listparindent
+                        \rightmargin   \leftmargin
+                        \parsep        \z@ \@plus\p@}%
+%                \item[]}
+                \item[]\startsinglespace}
+%               {\endlist}
+               {\endlist\startdoublespace}
+\renewenvironment{quote}
+               {\list{}{\rightmargin\leftmargin}%
+%                \item[]}
+                \item[]\startsinglespace}
+%               {\endlist}
+               {\endlist\startdoublespace}
+
+
+
+%    ****************************************
+%    *      MASTER'S THESIS SUPPORT         *
+%    ****************************************
+%
+% MDH - many of the differences between MS and PhD documents were removed
+% by the GS. (yeah!).  The following commands exist only for possible
+% backwards compatibility. (Nothing promised!)
+
+\def\@myabstrname{}
+\def\myabstrname#1{\def\@myabstrname{#1}}
+
+\def\@quartergrad{}
+\def\quartergrad#1{\def\@quartergrad{#1}}
+
+\def\@abstrdept{}
+\def\abstrdept#1{\def\@abstrdept{#1}}
+
+\def\@advisorabstrname{}
+\def\advisorabstrname#1{\def\@advisorabstrname{#1}}
+
+%% MM. 1994/08/17. Redefining Al's thesis command using new standards.
+\newcommand\thesis{
+  \def\@thesis{A Thesis}
+  \def\@committee{Master's Examination}
+
+  \typeout{ }
+  \typeout{Setting up for Thesis (\@degreeabbrev) rather than Dissertation.}
+  \typeout{ }
+}
+%
+% End of \thesis definition
+%
+
+% MDH - remove the rule above the footnotes.
+\let\footnoterule\relax
+
+%    ****************************************
+%    *           INITIALIZATION             *
+%    ****************************************
+%
+% Default initializations
+%% MM. 1994/08/09. Preserving Ram's choices.
+\startdoublespace
+
+%% MM. 1994/08/12. Grad School hates widows, etc. Using high numbers
+%% from the bibliography definition. This is brand new stuff!!
+\widowpenalty 10000
+\clubpenalty 10000
+
+%% MM. 1995/03/09. Grad School hates hyphenation at pagebreaks.
+%% Thanks to Donald Arseneau on comp.text.tex.
+%% If you don't like the way pages are broken because of this, remove
+%% this penalty (set it to 0 or delete this line), and manually check
+%% the last line of each page for hyphenation, rewording to get around
+%% bad hyphenation.
+\brokenpenalty=10000
+
+%% MM. 1994/08/18. Donald Arseneau's solution via comp.text.tex
+%  \@removefromreset{FOO}{BAR} : Removes counter FOO from the list of 
+%                       counters \cl@BAR to be reset when counter bar 
+%                       is stepped.  The opposite of \@addtoreset.
+
+\def\@removefromreset#1#2{\let\@tempb\@elt 
+   \expandafter\let\expandafter\@tempa\csname c@#1\endcsname
+   \def\@elt##1{\expandafter\ifx\csname c@##1\endcsname\@tempa\else
+         \noexpand\@elt{##1}\fi}%
+   \expandafter\edef\csname cl@#2\endcsname{\csname cl@#2\endcsname}%
+   \let\@elt\@tempb}
+
+
+%% MM. 1995/03/23. GS Format says footnotes can be consecutive
+%% throughout entire manuscript or within each chapter. report.cls has
+%% \@addtoreset{footnote}{chapter} to make it consecutive within each
+%% chapter. My personal preference is consecutive thoughout document.
+%%
+%% MDH 1996/10/04:  I agree!
+\@removefromreset{footnote}{chapter}
+
+\endinput
+%% 
+%% End of file `dissert-mod.sty'.
