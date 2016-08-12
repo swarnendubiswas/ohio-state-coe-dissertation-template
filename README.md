@@ -1,11 +1,13 @@
 # Ohio State CSE Dissertation Template
 
-This an unofficial LaTeX template for help with writing CSE dissertation at Ohio State University. This is not
+This an unofficial LaTeX template for help with writing CSE dissertation at Ohio State University. This template derives from the template available from the following link http://phaseportrait.blogspot.com/2011/02/updated-latex-document-class-for-ohio.html.
+
+This is not
 officially supported or provided by the CSE department at Ohio State University.
 
-I have used this template for my candidacy proposal, and it seems current as of April 2015. I am sharing this template
-since it might help other students. No LaTeX template seems to be available from the graduate school web pages as of
-April 2015.
+I have used this template for both my candidacy proposal and my dissertation, and it is up to date with the graduate
+school requirements as of August 2016. I am sharing this template since it might help other students. No LaTeX template
+is available from the graduate school web pages as of August 2015. Students at the College of Engineering use the following 
 
 ### Directory structure
 
