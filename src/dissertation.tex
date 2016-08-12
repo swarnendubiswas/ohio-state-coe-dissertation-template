@@ -2,23 +2,20 @@
 % The default option is phd. Also available are [osudraft] and [twoside]. As a reminder, documentclass options are a
 % comma-separated list, e.g. \documentclass[ms,osudraft]{osudissert96}
 % 
-\documentclass{ms,osudissert96}
-\documentclass{ms,osudissert96}
+\documentclass[ms]{osudissert96}
 
 % 
-% Everything between the \documentclass and the \begin{document} is
-%   called the preamble of the document. Everything between the
-%   \begin{document} and the \end{document} is called the body of the
+% Everything between the \documentclass and the \begin{document} is called the preamble of the document. Everything
+%   between the % \begin{document} and the \end{document} is called the body of the
 %   document. Define any additional commands you want here (the preamble)
 %   
 
 % SB: Put all package definitions in the following file
 \input{preamble}
-
-% SB: Define a toggle to save space, hacks to reduce whitespace to help with printing
-\newtoggle{compact-space}
-%\toggletrue{compact-space}
-\togglefalse{compact-space}
+% SB: Input toggle-able macros
+\input{toggle-macros}
+% SB: Proposal-wide macros file
+\input{macros}
 
 \iftoggle{compact-space}{
   % \setlength{\pdfpagewidth}{8.5in}
@@ -34,17 +31,6 @@
   {\normalfont\Large\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\large}   
   \titlespacing*{\chapter}{0pt}{-40pt}{30pt}
 }{}
-
-
-% SB: Proposal-wide macros file
-\input{proposal-macros}
-
-\newtoggle{extra-materials}
-% \toggletrue{extra-materials}
-\togglefalse{extra-materials}
-
-% SB: Uncommenting this line disables our comments
-% \renewcommand{\grumbler}[2]{}
 
 % 
 % It is better to break up the dissertation into multiple files (e.g.,
@@ -85,7 +71,7 @@
 %
 
 \author{Swarnendu Biswas}
-\title{OSU CSE PhD Candidacy Template}
+\title{Ohio State MS/PhD Dissertation Template}
 \authordegrees{XX, YY}  % Degrees thus far, not including this one.
 \unit{Department of Computer Science and Engineering}
 
@@ -177,8 +163,11 @@
 % and ``vita.tex''.
 %
 
-% #Not sure whether we should include ack and vita in the candidacy protocol
-% \include{ack}
+% Not sure whether we should include ack and vita in the candidacy protocol
+\if@phd
+\include{ack}
+\fi
+
 \include{vita} % Might not need for a candidacy proposal
 
 % SB: Space hack for toc, lof
