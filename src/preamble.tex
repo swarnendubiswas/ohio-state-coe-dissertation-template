@@ -1,34 +1,56 @@
-% SB: These packages were chosen solely by me based on my requirements and preferences. This mostly has nothing to do
-% with the university requirements.
+% SB: These packages were chosen solely by me based on my requirements and preferences. For most packages, excepting
+% babel, this should not affect university requirements.
 
-\usepackage[T1]{fontenc}
-\usepackage{url}
-% \usepackage[caption=false]{subfig}
-% \usepackage[numbers]{natbib}
-%\usepackage{algorithmic}
+% Encoding
+\usepackage[utf8]{inputenc} % enables the use of UTF-8 as character encoding
+\usepackage{microtype} % enables certain features 'towards typographical perfection'
+
+\usepackage[T1]{fontenc} % ensures the use of font encodings that support accented characters
+
+% Fonts
+\usepackage{calrsfs}
+\DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n}
+
+% Graphics
 \usepackage[pdftex]{graphicx}
-\usepackage{multirow}
-\usepackage{multicol}
-\usepackage{mdwlist}
-\usepackage{textcomp}
+\usepackage[usenames,dvipsnames]{xcolor}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{rotating}
+
+% Algorithms
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% Others
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{epstopdf}
-\usepackage{listings}
-\usepackage{booktabs}
-\usepackage{footnote}
-\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{mathptmx}
 \usepackage{etoolbox}
-% \usepackage[firstpage]{draftwatermark}
-
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{multicol}
+% \usepackage{textcomp}
+\usepackage{footnote}
 % SB: According to the hyperref documentation, the algorithm package should be loaded after hyperref
-\usepackage[bookmarks=true,hidelinks=false,linktocpage=false]{hyperref}
+\usepackage[pdftex,breaklinks,bookmarksnumbered,linktocpage=false,hidelinks=true]{hyperref}
 \usepackage{cite}
-
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{balance}
-
-% SB: For generating blind text
+\usepackage{bm}
+\usepackage{xparse}
+\usepackage[section]{placeins}
 \usepackage{lipsum}
+
+\graphicspath{ {figs/} }
+
+\newcolumntype{H}{>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
+
+\setcounter{secnumdepth}{4}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "dissertation"
+%%% End:

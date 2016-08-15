@@ -2,7 +2,7 @@
 % The default option is phd. Also available are [osudraft] and [twoside]. As a reminder, documentclass options are a
 % comma-separated list, e.g. \documentclass[ms,osudraft]{osudissert96}
 % 
-\documentclass[ms]{osudissert96}
+\documentclass[phd]{osudissert96}
 
 % 
 % Everything between the \documentclass and the \begin{document} is called the preamble of the document. Everything
@@ -71,9 +71,9 @@
 %
 
 \author{Swarnendu Biswas}
-\title{Ohio State MS/PhD Dissertation Template}
+\title{Ohio State College of Engineering MS/PhD Dissertation Template}
 \authordegrees{XX, YY}  % Degrees thus far, not including this one.
-\unit{Department of Computer Science and Engineering}
+\unit{Computer Science and Engineering}
 
 \advisorname{WW}
 \member{XX}
@@ -130,6 +130,13 @@
   \input{abstract}
 \end{abstract}
 
+%
+%  My Dedication
+%
+% SB: Dedication goes after the abstract
+% Dedication is not needed in candidacy proposal
+\dedication{\emph{Dedicated to all associated with The Ohio State University}}
+
 \iftoggle{compact-space}
 {\end{small}
 }{}
@@ -150,13 +157,6 @@
 %   \input{abstract}
 % \end{externalabstract}
 
-%
-%  My Dedication
-%
-
-% Dedication is not needed in candidacy proposal
-% \dedication{This is dedicated to the one I love \ldots\ la la la \ldots}
-
 
 %
 % Bring in Acknowledgement and Vita from separate files named ``ack.tex''
@@ -164,9 +164,7 @@
 %
 
 % Not sure whether we should include ack and vita in the candidacy protocol
-\if@phd
 \include{ack}
-\fi
 
 \include{vita} % Might not need for a candidacy proposal
 
@@ -255,3 +253,8 @@
 
 \end{document}
 
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

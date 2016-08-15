@@ -1,14 +1,14 @@
-%
+% 
 % $Id: osudissert96.cls,v 1.2 1998/11/02 00:45:41 hanes Exp $
-%
+% 
 % Modified:  1996/08/01 mdh to conform to 1995/1996 GS Format
 % Renamed:   1996/10/11 mdh to allow for backwards compatability.
-%
+% 
 % Original Author: Manas Mandal
- 
+
 %% This is the LaTeX2e document class for OSU dissertations according
 %% to the 1999 Graduate School specifications
-%%
+%% 
 %% This class is based on the standard LaTeX class `report'.
 
 \def\rcsStripFile$#1: #2,v ${#2}
@@ -64,57 +64,57 @@
 
 \DeclareOption{10pt}{\OptionNotUsed}
 \DeclareOption{11pt}{\OptionNotUsed}
-%\DeclareOption{12pt}{\OptionNotUsed}          % default
-%\DeclareOption{letterpaper}{\OptionNotUsed}   % default
+% \DeclareOption{12pt}{\OptionNotUsed}          % default
+% \DeclareOption{letterpaper}{\OptionNotUsed}   % default
 \DeclareOption{legalpaper}{\OptionNotUsed}
 \DeclareOption{executivepaper}{\OptionNotUsed}
 \DeclareOption{a4paper}{\OptionNotUsed}
 \DeclareOption{a5paper}{\OptionNotUsed}
 \DeclareOption{b5paper}{\OptionNotUsed}
 \DeclareOption{landscape}{\OptionNotUsed}
-%\DeclareOption{final}{\OptionNotUsed}
-%\DeclareOption{draft}{\OptionNotUsed}
-%\DeclareOption{oneside}{\OptionNotUsed}
-%\DeclareOption{twoside}{\OptionNotUsed}
-%\DeclareOption{openright}{\OptionNotUsed}
-%\DeclareOption{openany}{\OptionNotUsed}
-%\DeclareOption{onecolumn}{\OptionNotUsed}
+% \DeclareOption{final}{\OptionNotUsed}
+% \DeclareOption{draft}{\OptionNotUsed}
+% \DeclareOption{oneside}{\OptionNotUsed}
+% \DeclareOption{twoside}{\OptionNotUsed}
+% \DeclareOption{openright}{\OptionNotUsed}
+% \DeclareOption{openany}{\OptionNotUsed}
+% \DeclareOption{onecolumn}{\OptionNotUsed}
 \DeclareOption{twocolumn}{\OptionNotUsed}
-%\DeclareOption{titlepage}{\OptionNotUsed}     % default
+% \DeclareOption{titlepage}{\OptionNotUsed}     % default
 \DeclareOption{notitlepage}{\OptionNotUsed}
 \DeclareOption{openbib}{\OptionNotUsed}
-%\DeclareOption{leqno}{\OptionNotUsed}
-%\DeclareOption{fleqn}{\OptionNotUsed}
+% \DeclareOption{leqno}{\OptionNotUsed}
+% \DeclareOption{fleqn}{\OptionNotUsed}
 
 
 %% The default action for any option is to pass it to the report class.
- 
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
- 
+
 
 %% Execute the options.
- 
+
 \ProcessOptions
- 
+
 
 %% Load the report class in 12pt, letterpaper, titlepage (although we
 %% shall redefine maketitle later), onecolumn
- 
+
 \LoadClass[12pt,letterpaper,titlepage,onecolumn]{report}
 
 
 
-%\RequirePackage{newdissert}
+% \RequirePackage{newdissert}
 
 %% MM. 1994/07/26.
 % Requiring/using newdissert as a package causes some problems because
 % the following latex209 variables
-%       \footheight, \@maxsep, \@dblmaxsep
+% \footheight, \@maxsep, \@dblmaxsep
 % are not available in LaTeX2e. (I carefully read classes.dtx and
 % clsguide.tex, and concluded that those 3 variables won't matter.)
 % Also, it is a mistake to redefine \newcounter for
-%       part, chapter, section, subsection, subsubsection, paragraph
-%       figure, table
+% part, chapter, section, subsection, subsubsection, paragraph
+% figure, table
 
 
 \RequirePackage{osudissert96-mods}
@@ -173,40 +173,40 @@
 
 % masters defaults to M.S.
 \if@masters
-  \def\@degree{Master of Science}
-  \def\@degreeabbrev{M.S.}
+\def\@degree{Master of Science}
+\def\@degreeabbrev{M.S.}
 \fi
 
 \if@ms
-  \def\@degree{Master of Science}
-  \def\@degreeabbrev{M.S.}
-  \@masterstrue
+\def\@degree{Master of Science}
+\def\@degreeabbrev{M.S.}
+\@masterstrue
 \fi
 \if@ma
-  \def\@degree{Master of Arts}
-  \def\@degreeabbrev{M.A.}
-  \@masterstrue
+\def\@degree{Master of Arts}
+\def\@degreeabbrev{M.A.}
+\@masterstrue
 \fi
 
 % Since I don't know how to allow only one option, I do phd first.
 \if@phd
-  \def\@degree{Doctor of Philosophy}
-  \def\@degreeabbrev{Ph.D.}
-  \def\@committee{Dissertation}
-  \def\@thesis{Dissertation}
+\def\@degree{Doctor of Philosophy}
+\def\@degreeabbrev{Ph.D.}
+\def\@committee{Dissertation}
+\def\@thesis{Dissertation}
 \else
-  \if@dma
-    \def\@degree{Doctor of Musical Arts}
-    \def\@degreeabbrev{D.M.A.}
-    \def\@committee{D.M.A.}
-    \def\@thesis{D.M.A. DOCUMENT}
-  \else
-    \if@masters
-      \def\@thesis{A Thesis}
-      \def\@committee{Master's Examination}
-      \thesis
-    \fi
-  \fi
+\if@dma
+\def\@degree{Doctor of Musical Arts}
+\def\@degreeabbrev{D.M.A.}
+\def\@committee{D.M.A.}
+\def\@thesis{D.M.A. DOCUMENT}
+\else
+\if@masters
+\def\@thesis{A Thesis}
+\def\@committee{Master's Examination}
+\thesis
+\fi
+\fi
 \fi
 
 
