@@ -5,7 +5,7 @@ This template derives follows the rules prescribed by the Graduate School and Co
 this template extends the template available from [Ted Pavlic's blog]
 (http://phaseportrait.blogspot.com/2011/02/updated-latex-document-class-for-ohio.html).
 
-This template is neither officially supported nor provided by The Ohio State University. 
+**This template is neither officially supported nor provided by The Ohio State University.**
 
 I have used this template for both my candidacy proposal and my dissertation, and it is up to date with the graduate
 school requirements as of August 2016. I am sharing this template since it might help other students, since no LaTeX
