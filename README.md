@@ -18,7 +18,7 @@ The following structure is suggested.
 * figs -- Place your figures here.
 * misc -- Miscellaneous.
 * src -- LaTeX files.
-* bib -- 
+* bib -- Bibliography files.
 * tmp -- You can redirect your output (`*.aux, *.lot`) to this directory. 
 
 ### Building the project
