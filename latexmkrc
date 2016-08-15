@@ -1,4 +1,4 @@
-$pdflatex = 'env BIBINPUTS="$HOME/Documents/github/ohio-state-coe-dissertation-template/src//:$BIBINPUTS" TEXINPUTS="$HOME/Documents/github/ohio-state-coe-dissertation-template/src//:$TEXINPUTS" pdflatex %O %S';
+$pdflatex = 'env TEXINPUTS="$HOME/Documents/github/ohio-state-coe-dissertation-template/src//:$TEXINPUTS" pdflatex %O %S';
 $out_dir = './tmp';
 $view = "pdf";
 $aux_dir = "./tmp";
