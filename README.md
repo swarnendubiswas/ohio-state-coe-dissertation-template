@@ -40,3 +40,7 @@ The `figs` directory is already setup, you can use the following template for in
   \label{fig:zz}
 \end{figure}
 ```
+
+### Contributions
+
+Suggestions and pull requests are welcome.
