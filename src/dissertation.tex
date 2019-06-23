@@ -1,19 +1,15 @@
 % To change the dissertation to a Master's Thesis, include a documentclass option such as [masters], [ms], [ma], etc.
 % The default option is phd. Also available are [osudraft] and [twoside]. As a reminder, documentclass options are a
 % comma-separated list, e.g. \documentclass[ms,osudraft]{osudissert96}
-% 
-\documentclass[phd]{osudissert96}
 
-% 
-% Everything between the \documentclass and the \begin{document} is called the preamble of the document. Everything
-%   between the % \begin{document} and the \end{document} is called the body of the
-%   document. Define any additional commands you want here (the preamble)
-%   
+\documentclass[phd]{osudissert96}
 
 % SB: Put all package definitions in the following file
 \input{preamble}
+
 % SB: Input toggle-able macros
 \input{toggle-macros}
+
 % SB: Proposal-wide macros file
 \input{macros}
 
@@ -27,30 +23,30 @@
   \usepackage[font=small]{caption}
   \setlength{\abovecaptionskip}{5pt}
   \setlength{\belowcaptionskip}{-15pt}
-  \titleformat{\chapter}[display]   
-  {\normalfont\Large\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\large}   
+  \titleformat{\chapter}[display]
+  {\normalfont\Large\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\large}
   \titlespacing*{\chapter}{0pt}{-40pt}{30pt}
 }{}
 
-% 
+%
 % It is better to break up the dissertation into multiple files (e.g.,
 % one file per chapter, as well as separate files for the abstract,
-% acknowledgements, and vita).  These files are brought into the
+% acknowledgments, and vita).  These files are brought into the
 % document using \include{} statements.  There will be times, however,
 % when you don't want to print the ENTIRE dissertation.  You can limit
-% what will actually be printed by using the \includeonly{} statment.
+% what will actually be printed by using the \includeonly{} statement.
 % This contains a list of the files you want printed.  Any file NOT
 % listed will not be printed.  However, all page numbers, references,
 % etc., will be preserved as though all the files were actually
 % printed. For example, the line below would result only in chapters 1
 % and 3 being printed (if it were uncommented).
-% 
+
 
 % \includeonly{ch1.intro,ch3.implem}
 
 % UPDATED TEXT (2010):
 % In the newest format, titles should be title case everywhere.
-% 
+%
 % HISTORICAL TEXT (1996):
 % In the new format, the titles of each chapter should appear in
 % uppercase.  In the TOC, however, they should be in lowercase.
@@ -60,15 +56,13 @@
 % out the \typesetChapterTitle definition below and do your chapters in
 % the form:
 % \chapter[MY TITLE]{My Title}
-% 
+%
 % \renewcommand\typesetChapterTitle[1]{\uppercase{#1}}
 \renewcommand\typesetChapterTitle[1]{#1}
 
 \begin{document}
 
-%
 % First, declare the parts of your title page
-%
 
 \author{Swarnendu Biswas}
 \title{Ohio State College of Engineering MS/PhD Dissertation Template}
@@ -113,32 +107,32 @@
 %
 
 % If you get rid of \disscopyright, restore the \blankpage line after it
-\disscopyright
+\disscopyright{}
 %\blankpage
 
 % SB: Space hack for abstract
 \iftoggle{compact-space}
-{\compactspace
+{\compactspace{}
   \begin{small}
-}{}
+    }{}
 
-%
-% Abstract goes here.
-%
+    %
+    % Abstract goes here.
+    %
 
-\begin{abstract}
-  \input{abstract}
-\end{abstract}
+    \begin{abstract}
+      \input{abstract}
+    \end{abstract}
 
-%
-%  My Dedication
-%
-% SB: Dedication goes after the abstract
-% Dedication is not needed in candidacy proposal
-\dedication{\emph{Dedicated to all associated with The Ohio State University}}
+    %
+    %  My Dedication
+    %
+    % SB: Dedication goes after the abstract
+    % Dedication is not needed in candidacy proposal
+    \dedication{\emph{Dedicated to all associated with The Ohio State University}}
 
-\iftoggle{compact-space}
-{\end{small}
+    \iftoggle{compact-space}
+    {\end{small}
 }{}
 
 %
@@ -159,7 +153,7 @@
 
 
 %
-% Bring in Acknowledgement and Vita from separate files named ``ack.tex''
+% Bring in Acknowledgment and Vita from separate files named ``ack.tex''
 % and ``vita.tex''.
 %
 
@@ -170,62 +164,62 @@
 
 % SB: Space hack for toc, lof
 \iftoggle{compact-space}
-{\compactspace
+{\compactspace{}
   \begin{small}
-}{}
+    }{}
 
-%
-% Make the Table of Contents and other good stuff
-%
+    %
+    % Make the Table of Contents and other good stuff
+    %
 
-\tableofcontents
-\listoftables
-\listoffigures
+    \tableofcontents
+    \listoftables
+    \listoffigures
 
-\iftoggle{compact-space}{
-\end{small}
+    \iftoggle{compact-space}{
+  \end{small}
 }{}
 
 % SB: Space hack for the body
 \iftoggle{compact-space}
-{\compactspace
+{\compactspace{}
   \begin{small}
-}{}
+    }{}
 
-%
-% The following is a list of chapters.  Each is brought in from a
-% separate file using the \include{} command.
-%
+    %
+    % The following is a list of chapters.  Each is brought in from a
+    % separate file using the \include{} command.
+    %
 
-\newpage
-\input{introduction}     % tell them what you are going to tell them 
+    \newpage
+    \input{introduction}     % tell them what you are going to tell them
 
-\newpage
+    \newpage
 
-\input{background}   % describe the problem statement
+    \input{background}   % describe the problem statement
 
-\newpage
+    \newpage
 
-\input{contrib1}    % what is your solution
-\input{contrib2}
-\input{contrib3}
-\input{relatedwork}
-\input{futurework}
-\input{conclusion}       % conclusion stuff
+    \input{contrib1}    % what is your solution
+    \input{contrib2}
+    \input{contrib3}
+    \input{relatedwork}
+    \input{futurework}
+    \input{conclusion}       % conclusion stuff
 
-%
-% If you have appendices in your dissertation, you will need the
-% following, else keep it commented. The following appendices are in
-% files called ``app1.tex'', and ``app2.tex'', and they
-% look just like any chapter.
-%
+    %
+    % If you have appendices in your dissertation, you will need the
+    % following, else keep it commented. The following appendices are in
+    % files called ``app1.tex'', and ``app2.tex'', and they
+    % look just like any chapter.
+    %
 
-% \appendix
-% \include{app1}
-% \include{app2}
+    % \appendix
+    % \include{app1}
+    % \include{app2}
 
-\iftoggle{compact-space}{
-\end{small}
+    \iftoggle{compact-space}{
+  \end{small}
 }{}
 
 %
@@ -240,15 +234,15 @@
 % SB: Space hack for bibliography, can't get spacing to work
 \iftoggle{compact-space}{
   \begin{footnotesize}
-  \begin{spacing}{0.6}
-}{}
+    \begin{spacing}{0.6}
+      }{}
 
-\bibliographystyle{plain}
-\bibliography{ref}
+      \bibliographystyle{plain}
+      \bibliography{reference}
 
-\iftoggle{compact-space}{
-\end{spacing}
-\end{footnotesize}
+      \iftoggle{compact-space}{
+    \end{spacing}
+  \end{footnotesize}
 }{}
 
 \end{document}
