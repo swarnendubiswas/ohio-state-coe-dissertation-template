@@ -21,11 +21,10 @@ I have tested with TexLive distribution 2011 onward with `latexmk`.
 ```Bash
 cd; git clone git@github.com:swarnendubiswas/ohio-state-coe-dissertation-template.git;
 cd ohio-state-coe-dissertation-template
-cd tmp; ln -s ../src/reference.bib .; cd ..
-latexmk
+latexmk -f
 ```
 
-The symlink creation step is to provide the `.bib` path to `latexmk`. I am not aware of an easier way to do this.
+The build currently fails without the `-f` option to `latexmk`. This seems to be an issue with passing correct environment variables with `latexmk`.
 
 ### Including Figures
 
