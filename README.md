@@ -2,17 +2,16 @@
 
 This an **unofficial** LaTeX template for help with writing MS theses and PhD dissertations at The Ohio State University. This template extends the template available from [Ted Pavlic's blog](http://phaseportrait.blogspot.com/2011/02/updated-latex-document-class-for-ohio.html).
 
-This template follows the rules prescribed by the Graduate School and College of Engineering. I (and hopefully others) have used this template for both my candidacy proposal and my dissertation, and is up to date with the graduate school requirements as of August 2016. I am sharing this template since it might help others, since no official LaTeX template is available from the graduate school as of August 2016.
+This template follows the rules prescribed by the Graduate School and College of Engineering. I (and hopefully others) have used this template for both my candidacy proposal and my PhD dissertation, and is up to date with the graduate school requirements as of August 2016. I am sharing this template since it might help others, since no official LaTeX template is available from the graduate school as of August 2016.
 
 Note: This template is **not officially supported** by The Ohio State University. I do not make claims about its **conformity with the current requirements**.
 
 ## Directory structure
 
-* `bib` -- Bibliography files.
 * `figs` -- Place your figures here.
 * `misc` -- Miscellaneous.
-* `src` -- LaTeX files.
-* `tmp` -- You can (optionally) redirect your output (`*.aux, *.lot`) to this directory.
+* `src` -- LaTeX (`.tex` and `.bib`) files.
+* `tmp` -- The auxiliary files (for e.g., `*.aux, *.lot`) get redirected to this directory.
 
 ## Building the project
 
@@ -24,7 +23,7 @@ cd ohio-state-coe-dissertation-template
 latexmk -f
 ```
 
-The build currently fails without the `-f` option to `latexmk`. This seems to be an issue with passing correct environment variables with `latexmk`.
+The build currently fails without the `-f` option to `latexmk`. There seems to be an issue with passing correct environment variables with `latexmk`.
 
 ### Including Figures
 

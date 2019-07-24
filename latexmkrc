@@ -14,6 +14,6 @@ $go_mode = 1; # -g option
 @default_files = ("src/dissertation.tex");
 $bibtex_use = 1;
 $pdf_mode = 1; # -pdf option, generate pdf using pdflatex
-$clean_ext = "aux out lot log lof toc bbl blg synctex.gz";
+$clean_ext = "aux out lot log lof toc bbl blg fls synctex.gz";
 $pdf_previewer = "start evince %O %S"; # -pvc option
 $cleanup_mode = 2;

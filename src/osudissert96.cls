@@ -1,14 +1,14 @@
-% 
+%
 % $Id: osudissert96.cls,v 1.2 1998/11/02 00:45:41 hanes Exp $
-% 
+%
 % Modified:  1996/08/01 mdh to conform to 1995/1996 GS Format
 % Renamed:   1996/10/11 mdh to allow for backwards compatability.
-% 
+%
 % Original Author: Manas Mandal
 
 %% This is the LaTeX2e document class for OSU dissertations according
 %% to the 1999 Graduate School specifications
-%% 
+%%
 %% This class is based on the standard LaTeX class `report'.
 
 \def\rcsStripFile$#1: #2,v ${#2}
@@ -21,21 +21,23 @@
 \typeout{Version \rcsStrip$Revision: 1.2 $  of \rcsStripFile $RCSfile: osudissert96.cls,v $ (\rcsStripDate$Date: 1998/11/02 00:45:41 $)}
 
 %% Dissertation style options (other than `report' options) are
-% phd (default) | dma | masters | ms | ma
+% phd (default) | masters | ms | candidacy
 % osudraft (default is off)
 
 \newif\if@phd\@phdtrue
-\newif\if@dma\@dmafalse
+\newif\if@candidacy\@candidacyfalse
 \newif\if@masters\@mastersfalse
 \newif\if@ms\@msfalse
-\newif\if@ma\@mafalse
+% \newif\if@dma\@dmafalse
+% \newif\if@ma\@mafalse
 \newif\if@osudraft\@osudraftfalse
 
 \DeclareOption{phd}{\@phdtrue}
-\DeclareOption{dma}{\@dmatrue\@phdfalse}
-\DeclareOption{masters}{\@masterstrue\@phdfalse}
+\DeclareOption{candidacy}{\@candidacytrue\@phdfalse\@msfalse}
 \DeclareOption{ms}{\@mstrue\@phdfalse}
-\DeclareOption{ma}{\@matrue\@phdfalse}
+\DeclareOption{masters}{\@masterstrue\@mstrue\@phdfalse}
+% \DeclareOption{ma}{\@matrue\@phdfalse}
+% \DeclareOption{dma}{\@dmatrue\@phdfalse}
 \DeclareOption{osudraft}{\@osudrafttrue}
 
 \ExecuteOptions{phd}
@@ -101,8 +103,6 @@
 %% shall redefine maketitle later), onecolumn
 
 \LoadClass[12pt,letterpaper,titlepage,onecolumn]{report}
-
-
 
 % \RequirePackage{newdissert}
 
@@ -182,11 +182,12 @@
 \def\@degreeabbrev{M.S.}
 \@masterstrue
 \fi
-\if@ma
-\def\@degree{Master of Arts}
-\def\@degreeabbrev{M.A.}
-\@masterstrue
-\fi
+% SB: Not sure about the requirements for MA
+% \if@ma
+% \def\@degree{Master of Arts}
+% \def\@degreeabbrev{M.A.}
+% \@masterstrue
+% \fi
 
 % Since I don't know how to allow only one option, I do phd first.
 \if@phd
@@ -195,22 +196,22 @@
 \def\@committee{Dissertation}
 \def\@thesis{Dissertation}
 \else
-\if@dma
-\def\@degree{Doctor of Musical Arts}
-\def\@degreeabbrev{D.M.A.}
-\def\@committee{D.M.A.}
-\def\@thesis{D.M.A. DOCUMENT}
-\else
+% SB: Not sure about the requirements for MA
+% \if@dma
+% \def\@degree{Doctor of Musical Arts}
+% \def\@degreeabbrev{D.M.A.}
+% \def\@committee{D.M.A.}
+% \def\@thesis{D.M.A. DOCUMENT}
+% \else
 \if@masters
 \def\@thesis{A Thesis}
 \def\@committee{Master's Examination}
 \thesis
-\fi
+% \fi
 \fi
 \fi
 
 
 \endinput
-%% 
+%%
 %% End of file `osudissert96.cls'.
-

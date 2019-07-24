@@ -1,15 +1,10 @@
-% To change the dissertation to a Master's Thesis, include a documentclass option such as [masters], [ms], [ma], etc.
-% The default option is phd. Also available are [osudraft] and [twoside]. As a reminder, documentclass options are a
-% comma-separated list, e.g. \documentclass[ms,osudraft]{osudissert96}
-
-\documentclass[phd]{osudissert96}
+% To change the dissertation to a Master's Thesis, use a documentclass option such as [masters] or [ms]. To change to a PhD candidacy proposal, use a documentclass option [candidacy]. The default option is phd. Also available are [osudraft] and [twoside]. As a reminder, documentclass options are a comma-separated list, e.g. \documentclass[ms,osudraft]{osudissert96}
+\documentclass[candidacy]{osudissert96}
 
 % SB: Put all package definitions in the following file
 \input{preamble}
-
 % SB: Input toggle-able macros
 \input{toggle-macros}
-
 % SB: Proposal-wide macros file
 \input{macros}
 
@@ -65,7 +60,7 @@
 % First, declare the parts of your title page
 
 \author{Swarnendu Biswas}
-\title{Ohio State College of Engineering MS/PhD Dissertation Template}
+\title{Ohio State College of Engineering MS/PhD/Candidacy Dissertation Template}
 \authordegrees{XX, YY}  % Degrees thus far, not including this one.
 \unit{Computer Science and Engineering}
 
@@ -127,8 +122,7 @@
     %
     %  My Dedication
     %
-    % SB: Dedication goes after the abstract
-    % Dedication is not needed in candidacy proposal
+    % SB: Dedication goes after the abstract. Dedication is not needed in candidacy proposal.
     \dedication{\emph{Dedicated to all associated with The Ohio State University}}
 
     \iftoggle{compact-space}

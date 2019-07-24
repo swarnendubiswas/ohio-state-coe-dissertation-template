@@ -1,23 +1,23 @@
-% 
+%
 % $Id: osudissert96-mods.sty,v 1.5 1998/11/02 00:45:41 hanes Exp $
-% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MDH:
 % This file has been modified significantly to accommodate the new
 % dissertation/thesis format put out by the Graduate School in 1996.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This document was written by Manas Mandal based on ``report.cls''
 % and ``newdissert.sty''.
 % Elizabeth Zwicky wrote the original ``dissert.sty'' based on
 % Lamport's ``report.sty'' and the Stanford thesis style ``suthesis.sty''.
 % J. Ramanujam and Con O'Connell got ``newdissert.sty'' working.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Algorithms/experiences/implementation ideas are thanks to Elizabeth
 % Zwicky, J. Ramanujam, Con O'Connell, Bill White, Ben Blake, Ronnie
 % Sarkar, Julie Barnes, John Mudd, Andy Yang, Doug Roble, Tony Leclerc,
 % Al Fencl, Manas Mandal, Jim Vaigl and a host of others who have gone
 % through the ordeal of getting the format through the Grad School at OSU.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 2011/02/11. Theodore P. Pavlic - Added \blankpage for omitted
 % \disscopyright
 % 2010/07/22. Theodore P. Pavlic - Changed ``Adviser'' to ``Advisor''
@@ -40,7 +40,7 @@
 % conflicts)
 % 1996/11/01. MDH - Fixed co-advisor bugs (Adviser->Coadviser)
 % 1996/10/11. MDH - Renamed to support older usage of osudissert
-% 1996/10/09. MDH - Got rid of the nasty MakeUppercase command 
+% 1996/10/09. MDH - Got rid of the nasty MakeUppercase command
 % - Unfortunately, this means uppercasing must be done manually
 % 1996/08/01. MDH - major overhaul to conform to new guidelines.
 % 1994/08/17. Manas Mandal finished newdissert-mod, Version 1.
@@ -49,7 +49,7 @@
 % 11/17/92. Al Fencl added the VITA support
 % 5/18/90. J. Ramanujam froze his version of newdissert.
 % 1988/89. Elizabeth Zwicky created dissert.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ****************************************
 % *            PAGE LAYOUT               *
@@ -101,7 +101,7 @@
 
 \setlength\footnotesep{\singlespacelength}
 
-\skip\footins 8pt plus 2pt minus 4pt % Space between last line of text and 
+\skip\footins 8pt plus 2pt minus 4pt % Space between last line of text and
 % top of first footnote.
 
 %% MM. 1994/08/12. ``newdissert.sty'' had solved this by redefining
@@ -185,7 +185,7 @@
 \newif\ifapp
 \appfalse
 
-% ted - (2010) ``Part'' is supportedin report; put it here too
+% ted - (2010) ``Part'' is supported in report; put it here too
 % modify it the same way chapter is below (re: arabic page
 % numbers; title on same line)
 \def\@part[#1]#2{%
@@ -212,10 +212,10 @@
     \Huge \bfseries #2\par}%
   \@endpart}
 
-% 
+%
 % MDH - the need for osuchapter and currentlabel is now gone.  GS has
 % redefined chapters to be done in arabic numerals and not roman.
-% 
+%
 
 \def\@chapter[#1]#2{
   %% MM. 1994/08/09. Cheating!! Doing it even if secnumdepth didn't want it.
@@ -231,7 +231,7 @@
   \ifnum\value{chapter}=1
   % ted - (2010) change how ``Appendices'' shows up in TOC
   \addcontentsline{toc}{part}{\appendicesname}%
-  % \addtocontents{toc}{\vskip 1.0em plus 1pt 
+  % \addtocontents{toc}{\vskip 1.0em plus 1pt
   % \hskip -\parindent \appendicesname\hfill%
   % \vskip 0.25em\rm}
   \else
@@ -270,11 +270,11 @@
   \fi
 }
 
-% 
+%
 % MDH - Chapter head commands has been modified to conform to the new GS
 % guidelines.  Chapter # is 2in from top, followed by 4 spaces, followed by
 % the title, about 4 spaces, and then the text.
-% 
+%
 
 % ted - (2010) New guidelines suggest chapter number and title on same line
 \def\@makechapterhead#1{%
@@ -315,7 +315,7 @@
 % MDH - these are basically identical to those in report, except the parm on
 % the 2nd line was negated to cause the first paragraph to be indented.
 % (See The Latex Companion, pg 25).
-% 
+%
 \renewcommand\section{\@startsection {section}{1}{\z@}%
   {3.5ex \@plus 1ex \@minus .2ex}%
   {2.3ex \@plus.2ex}%
@@ -609,12 +609,12 @@
 \def\draftPSmoveto{ 0 0 }
 \def\draftPSfont{ /Times-Roman }
 
-\def\draftstamp{\special{! userdict 
+\def\draftstamp{\special{! userdict
     begin /start-hook{
       gsave \draftPStranslate translate
-      \draftPSrotate rotate \draftPSfont findfont 
+      \draftPSrotate rotate \draftPSfont findfont
       \draftPSscalefont scalefont setfont
-      \draftPSmoveto moveto \draftPSgraylevel setgray 
+      \draftPSmoveto moveto \draftPSgraylevel setgray
       (\drafttext) show grestore
     }def end}}%
 
@@ -716,7 +716,7 @@
 \def\@candidacy{Candidacy proposal}
 \def\@Candidacy{Candidacy Proposal}
 \def\unit#1{\def\@unit{#1}}
-\def\@unit{Department of Electrical Engineering}
+\def\@unit{Department of Computer Science and Engineering}
 \def\graduationyear#1{\def\@graduationyear{#1}}
 \def\@graduationyear{\year}
 
@@ -776,20 +776,33 @@
         \if@phd
         {\large {\@thesis}}
         \else
+        \if@ms
+        {\large {\@thesis}}
+        \else
+        \if@candidacy
         {\large {\@candidacy}}
+        \fi
+        \fi
         \fi
         \if@phd
         \vskip 30pt
         {\large Presented in Partial Fulfillment of the Requirements for
           the Degree \@degree{} in the
           Graduate School of The Ohio State University}
+        \else
+        \if@ms
+        \vskip 30pt
+        {\large Presented in Partial Fulfillment of the Requirements for
+          the Degree \@degree{} in the
+          Graduate School of The Ohio State University}
+        \fi
         \fi
         \vskip 20pt
         {\large By}
         \vskip 20pt
         {\large \lineskip .75em
           \begin{tabular}[t]{c}\@author , \@authordegrees
-          \end{tabular}\par} 
+          \end{tabular}\par}
         \vskip 15pt
         {\large \lineskip .75em
           \begin{tabular}[t]{c}Graduate Program in \@unit
@@ -810,7 +823,13 @@
           \if@phd
           {\large \@committee{} Committee:}\centering
           \else
+          \if@ms
+          {\large \@committee{} Committee:}\centering
+          \else
+          \if@candidacy
           {\large \@Candidacy{} Committee:}\centering
+          \fi
+          \fi
           \fi
           \vskip 3pt
           %% MM. 1995/02/18. Taking care of co-advisors.
@@ -830,14 +849,14 @@
   \ifadvisor\def\@adviser{Advisor}\setcounter{page}{0}\@maketitle\fi
   \gdef\@thanks{}
   \startdoublespace
-  \let\maketitle\relax} 
+  \let\maketitle\relax}
 
 % MDH -  Redefining external abstract using new standards. - pg 128-129 of
 % GS Handbook.  True for MS & PhD now!  Note that the degree is the
 % degree of the document, not the prior degrees!
 
 \newenvironment{externalabstract}{
-  \newpage 
+  \newpage
   \setcounter{disspage}{\value{page}}
   \setcounter{page}{1}
   \pagenumbering{arabic}
@@ -870,9 +889,9 @@
   \setcounter{page}{\value{disspage}}
   \startdoublespace}
 
-% 
+%
 % MDH - The formatting for the abstract internal to (now required) the dissertation/thesis
-% 
+%
 \renewenvironment{abstract}{
   \chapter*{\typesetHeading{\abstractname}}
   \addcontentsline{toc}{front}{{\abstractnameLC}}
@@ -933,19 +952,19 @@
 \let\acknowledgements\acknowledgments
 
 
-%% 
+%%
 %% vita style for use with newdissert at Ohio State
 %% university.  Created by H. Allan Fencl  11/92
-%% 
-%%%% 
+%%
+%%%%
 %% Sample usage:
-%% 
+%%
 %% \begin{vita}
-%%   
+%%
 %%   \dateitem{Some Date}{Why its important}
 %%   \dateitem{Another Date}{Why this is important}
 %%   ...
-%%   
+%%
 %%   \begin{publist}
 %%     \researchpubs
 %%     \pubitem{My first research publication}
@@ -955,25 +974,25 @@
 %%     \pubitem{Some sort of instructional publication}
 %%     ...
 %%   \end{publist}
-%%   
+%%
 %%   \begin{fieldsstudy}
 %%     \majorfield{My Ph.D. Major}
-%%   %     
-%%   %     Note:  If there were only one field of study, the following list 
+%%   %
+%%   %     Note:  If there were only one field of study, the following list
 %%   %     would best be done using the following single command:
-%%   %     
+%%   %
 %%   %     \onestudy{Only Topic}{Only Professor}
-%%   %     
-%%     
+%%   %
+%%
 %%     \begin{studieslist}
 %%       \studyitem{Topic 1}{Professor 1}
 %%       \studyitem{Topic 2}{Professor 2}
 %%       \studyitem{Topic 3}{Professor 3}
 %%     \end{studieslist}
-%%     
+%%
 %%   \end{vita}
-%%   
-%%%%   
+%%
+%%%%
 
 %%   MM. 1994/08/17. Redefining Al's vita environment using new standards.
 \newenvironment{vita}{
@@ -987,51 +1006,51 @@
 {\par\startdoublespace}
 
 
-%% 
+%%
 %% \dateitem{date}{what}
-%% 
-%% Creates a listing of important dates. The date and what are 
+%%
+%% Creates a listing of important dates. The date and what are
 %% separated by a \dotfill and the what is in a parbox
-%% 
+%%
 
 \def\dateitem#1#2{\noindent #1 \dotfill \parbox[t]{2.75in}{#2}\par~\par}
 
-%% 
+%%
 %% \begin{publist} ...\end{publist}
-%% 
+%%
 %% Used around the list of publications.  Items done and separated
 %% using the commands below
-%% 
+%%
 
 \newenvironment{publist}%
 {\vspace*{15pt}\begin{center}{\typesetHeading{\publicationsname}}%
   \end{center}\vspace*{10pt}}
 {\vspace{\singlespacelength}}
 
-%% 
+%%
 %% \researchpubs  and \instructpubs
-%% 
+%%
 %% Used to create ``sub-headings'' within the list of publications
-%% 
+%%
 
 \def\researchpubs{\noindent {\bf Research Publications}\par~~\par}
 \def\instructpubs{\noindent {\bf Instructional Publications}\par~~\par}
 
-%% 
+%%
 %% \pubitem{reference}
-%% 
+%%
 %% Used to list the references you have within a publist environment
 %% Note:  Easiest to use bibtex to generate this list.
-%% 
+%%
 
 \def\pubitem#1{\noindent #1 \par~~\par}
 
-%% 
+%%
 %% \begin{fieldsstudy} ...\end{fieldsstudy}
-%% 
-%% Used to create the list of your major and what fields you have 
+%%
+%% Used to create the list of your major and what fields you have
 %% looked at within your major.
-%% 
+%%
 
 \newenvironment{fieldsstudy}%
 {\begin{center}{\typesetHeading\fieldsname}\end{center}%
@@ -1039,54 +1058,54 @@
 {}
 
 % ted - (2010) default to \@unit if star present
-%% 
+%%
 %% \majorfield{Field}
 %% \majorfield*
-%% 
+%%
 %% Used to create a line indicating your major
 %% e.g. Computer Science and Engineering
-%% 
+%%
 
 \def\majorfield{\@ifstar{\@majorfield{\@unit}}{\@majorfield}}
 \def\@majorfield#1{\noindent Major Field:  #1\par~\par}
 
-%% 
+%%
 %% \onestudy{Topic}{Professor}
-%% 
+%%
 %% Used to create a single line if you have studies only one topic.
 %% If have looked at more than one thing, should use the environment below.
-%% 
+%%
 
 \def\onestudy#1#2{Studies in #1: #2}
 
-%% 
+%%
 %% The following is used to list the topics you have studies and who you
 %% studied with.
-%% 
+%%
 %% \begin{studieslist}
 %%   \studyitem{Topic}{Professor}
 %%   \studyitem{Topic}{Professor}
 %%   ...
 %%   \studyitem{Topic}{Professor}
 %% \end{studieslist}
-%% 
+%%
 
 \def\studieslist{Studies in:\par\vspace*{8pt}\hspace*{2em}\begin{tabular}{l l}}
                                                             \def\endstudieslist{\end{tabular}}
 
                                                           \def\studyitem#1#2{#1 & #2\\}
 
-                                                          %%% 
+                                                          %%%
                                                           %%% End of vita stuff
-                                                          %%% 
+                                                          %%%
 
-                                                          %% 
+                                                          %%
                                                           %% MDH 1996/10/04: verse, quotation, and quote were added to comply with GS
                                                           %% requirements of single spacing.  Added due to missed MM update.
                                                           %% They are basically modified versions out of report.cls
-                                                          %% 
+                                                          %%
                                                           %% MM. 1995/03/08. Stephen Edwards found out that these are single-spaced.
-                                                          %% 
+                                                          %%
                                                           \renewenvironment{verse}
                                                           {\let\\=\@centercr
                                                             \list{}{\itemsep      \z@
@@ -1119,7 +1138,7 @@
                                                           % ****************************************
                                                           % *      MASTER'S THESIS SUPPORT         *
                                                           % ****************************************
-                                                          % 
+                                                          %
                                                           % MDH - many of the differences between MS and PhD documents were removed
                                                           % by the GS. (yeah!).  The following commands exist only for possible
                                                           % backwards compatibility. (Nothing promised!)
@@ -1145,9 +1164,9 @@
                                                             \typeout{Setting up for Thesis (\@degreeabbrev) rather than Dissertation.}
                                                             \typeout{ }
                                                           }
-                                                          % 
+                                                          %
                                                           % End of \thesis definition
-                                                          % 
+                                                          %
 
                                                           % MDH - remove the rule above the footnotes.
                                                           \let\footnoterule\relax
@@ -1155,7 +1174,7 @@
                                                           % ****************************************
                                                           % *           INITIALIZATION             *
                                                           % ****************************************
-                                                          % 
+                                                          %
                                                           % Default initializations
                                                           %% MM. 1994/08/09. Preserving Ram's choices.
                                                           \startdoublespace
@@ -1174,11 +1193,11 @@
                                                           \brokenpenalty=10000
 
                                                           %% MM. 1994/08/18. Donald Arseneau's solution via comp.text.tex
-                                                          % \@removefromreset{FOO}{BAR} : Removes counter FOO from the list of 
-                                                          % counters \cl@BAR to be reset when counter bar 
+                                                          % \@removefromreset{FOO}{BAR} : Removes counter FOO from the list of
+                                                          % counters \cl@BAR to be reset when counter bar
                                                           % is stepped.  The opposite of \@addtoreset.
 
-                                                          \def\@removefromreset#1#2{\let\@tempb\@elt 
+                                                          \def\@removefromreset#1#2{\let\@tempb\@elt
                                                             \expandafter\let\expandafter\@tempa\csname c@#1\endcsname
                                                             \def\@elt##1{\expandafter\ifx\csname c@##1\endcsname\@tempa\else
                                                               \noexpand\@elt{##1}\fi}%
@@ -1190,10 +1209,10 @@
                                                           %% throughout entire manuscript or within each chapter. report.cls has
                                                           %% \@addtoreset{footnote}{chapter} to make it consecutive within each
                                                           %% chapter. My personal preference is consecutive thoughout document.
-                                                          %% 
+                                                          %%
                                                           %% MDH 1996/10/04:  I agree!
                                                           \@removefromreset{footnote}{chapter}
 
                                                           \endinput
-                                                          %% 
+                                                          %%
                                                           %% End of file `dissert-mod.sty'.
