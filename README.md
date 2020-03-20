@@ -41,8 +41,6 @@ The `figs` directory is already setup, you can use the following template for in
 ### Known Issues
 
 * Fix the issue with `latexmk -f`.
-* Integrate build scheme with popular editors like VS Code and GNU Emacs.
-    * You can use LaTeX Workshop to build the template, but the output is not being redirected to `tmp`.
 
 ## Contributions
 
