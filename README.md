@@ -1,10 +1,10 @@
 # Unofficial Ohio State College of Engineering MS/PhD Dissertation Template
 
-This an **unofficial** LaTeX template for help with writing MS theses, PhD dissertations, and PhD candidacy proposals at The Ohio State University. This template extends the template available from [Ted Pavlic's blog](http://phaseportrait.blogspot.com/2011/02/updated-latex-document-class-for-ohio.html).
+This is an **unofficial** LaTeX template to help write MS theses, PhD candidacy proposals and dissertations at The Ohio State University. This template extends the template available from [Ted Pavlic's blog](http://phaseportrait.blogspot.com/2011/02/updated-latex-document-class-for-ohio.html).
 
-This template attempts to follow the rules prescribed by the Graduate School and College of Engineering. I (and hopefully others) have used this template for both my candidacy proposal and my PhD dissertation, and is up to date with the graduate school requirements as of August 2016. I am sharing this template since it might help others, since no official LaTeX template is available from the graduate school as of August 2016.
+This template attempts to follow the rules prescribed by the Graduate School and College of Engineering. I have used this template for my PhD candidacy proposal and my dissertation and is up to date with the graduate school requirements as of August 2016. I am sharing this template since it might help others, since no official LaTeX template is available from the graduate school as of August 2016.
 
-**Note**: This template is not officially supported by The Ohio State University, and I do not make claims about its conformity with the current requirements.
+This template **is not** officially supported by The Ohio State University, and I do not make claims about its conformity with the current requirements.
 
 ## Directory structure
 
@@ -23,7 +23,7 @@ cd ohio-state-coe-dissertation-template
 latexmk -f
 ```
 
-The build currently fails without the `-f` option to `latexmk`. There seems to be an issue with passing correct environment variables with `latexmk`.
+There seems to be an issue with passing correct environment variables with `latexmk`. The build currently fails without the `-f` option to `latexmk`.
 
 ### Including Figures
 
@@ -38,10 +38,11 @@ The `figs` directory is already setup, you can use the following template for in
 \end{figure}
 ```
 
-### TODOs
+### Known Issues
 
-* Integrate build scheme with popular editors like VS Code and GNU Emacs.
 * Fix the issue with `latexmk -f`.
+* Integrate build scheme with popular editors like VS Code and GNU Emacs.
+    * You can use LaTeX Workshop to build the template, but the output is not being redirected to `tmp`.
 
 ## Contributions
 
